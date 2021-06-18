@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Voting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class VotingController extends Controller
 {
@@ -18,13 +19,13 @@ class VotingController extends Controller
           //$books = Book::all()->paginator(6);
           $votings = DB::table('votings')
           ->join('books', 'votings.bid', '=', 'books.id')
-          ->join('students', 'votings.sid', '=', 'students.id')
-          ->select('votings.*', 'books.title', 'books.ISBN', 'books.author', 'books.publisher', 'students.name as username')
+          ->join('users', 'votings.sid', '=', 'users.id')
+          ->select('votings.*', 'books.title', 'books.ISBN', 'books.author', 'books.publisher', 'users.name as username')
           ->get();
           //->paginator(6);
           //DB::select("select * ...");
-        // select books.*, students.name as username from books, students where  
-        // books.sid = students.id
+        // select books.*, users.name as username from books, users where  
+        // books.sid = users.id
         //
         //return response()->json($books);
         return view('votings.index', compact('votings'));      
@@ -49,13 +50,14 @@ class VotingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'sid'=>'required',
+            //'sid'=>'required',
             'bid'=>'required',
            ]);
 
         //
         $voting = new Voting([
-            'sid' => $request->get('sid'),  // Auth::user()->id,
+            //'sid' => $request->get('sid'),  
+            'sid' => Auth::user()->id,
             'bid' => $request->get('bid'),
             'voting_date' => now()
         ]);
