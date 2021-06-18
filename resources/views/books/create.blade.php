@@ -16,12 +16,7 @@
     @endif
       <form method="post" action="{{ route('books.store') }}"  enctype="multipart/form-data" >
           @csrf
-          
-          <div class="form-group">
-              <label for="sid">分享者ID</label>
-              <input type="text" class="form-control" name="sid"/>
-          </div>
-
+          <!-- 刪除 sid -->
           <div class="form-group">
               <label for="title">圖書名稱:</label>
               <input type="text" class="form-control" name="title"/>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -18,8 +19,8 @@ class BookController extends Controller
         //
         //$books = Book::all()->paginator(6);
         $books = DB::table('books')
-                 ->join('students', 'books.sid', '=', 'students.id')
-                 ->select('books.*', 'students.name as username')
+                 ->join('users', 'books.sid', '=', 'users.id')
+                 ->select('books.*', 'users.name as username')
                  ->get();
                  //->paginator(6);
                  //DB::select("select * ...");
@@ -51,7 +52,7 @@ class BookController extends Controller
     {
         // 1.
         $request->validate([
-            'sid'=>'required',
+            //'sid'=>'required',
             'title'=>'required',
             'author'=>'required',
             'publisher'=>'required',
@@ -70,8 +71,8 @@ class BookController extends Controller
         // * 更新對應欄位
         // 3.
         $book = new Book([
-            'sid' => $request->get('sid'),
-            //'sid' => Auth::user()->id,
+            //'sid' => $request->get('sid'),
+            'sid' => Auth::user()->id,
             //
             'title' => $request->get('title'),
             'author' => $request->get('author'),

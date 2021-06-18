@@ -20,7 +20,7 @@ class CreateVotingsTable extends Migration
             // 投票者 id
             $table->biginteger('sid')->unsigned(); 
             // 設為外來鍵: 指定關聯性
-            $table->foreign('sid')->references('id')->on('students')->onDelete('cascade');
+            $table->foreign('sid')->references('id')->on('users')->onDelete('cascade');
                         // book id
             $table->biginteger('bid')->unsigned(); 
             $table->foreign('bid')->references('id')->on('books')->onDelete('cascade');

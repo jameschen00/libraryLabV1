@@ -16,7 +16,11 @@ class Voting extends Model
     ];
     
     //
-    public function student(){
-        return $this->belongsTo('App\Models\Student');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+    //
+    public function book(){
+        return $this->belongsTo('App\Models\Book');
     }
 }

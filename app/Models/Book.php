@@ -22,7 +22,11 @@ class Book extends Model
     ];
     
     //
-    public function student(){
-        return $this->belongsTo('App\Models\Student');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
+    //
+    //public function votings() {
+    //    return $this->hasMany('App\Models\Voting', 'bid', 'id');
+    //}
 }
